@@ -1,0 +1,9 @@
+repoURL: "https://github.com/kubernetes-sigs/external-dns.git"
+path: "charts/external-dns"
+targetRevision: "v0.15.0"
+
+rbac:
+  additionalPermissions: []
+sources:
+- ingress
+- kong-kongingress

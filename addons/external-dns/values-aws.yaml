@@ -1,0 +1,5 @@
+
+domainFilters:
+- *foxtrot.reltio.com
+provider:
+  name: aws

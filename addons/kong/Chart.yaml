@@ -1,0 +1,13 @@
+apiVersion: v2
+description: The Cloud-Native Ingress and API-management
+name: kong
+home: https://konghq.com/
+sources:
+  - https://github.com/Kong/charts/tree/main/charts/kong
+version: 2.41.1
+appVersion: "3.6"
+dependencies:
+  - name: postgresql
+    version: 11.9.13
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled

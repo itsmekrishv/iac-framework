@@ -1,0 +1,28 @@
+proxy:
+  type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: alb
+    path: "/*"
+    annotations:
+      # Enable for AWS ALB
+      # Documentation on the annotations is under
+      # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/guide/ingress/annotations/
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+      alb.ingress.kubernetes.io/backend-protocol: HTTP
+
+      # Healthcheck config
+      alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+      alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+      # There is no route and service for "/" so Kong returns a 404.
+      # If Kong is not running the health check will time out instead.
+      # We could use an url where Kong returns 200, but this URL will depend
+      # on a backend service. So Kong would be down, when this service is down.
+      alb.ingress.kubernetes.io/healthcheck-path: /
+      alb.ingress.kubernetes.io/success-codes: '404'
+
+      # preserve client ip
+      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+      

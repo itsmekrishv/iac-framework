@@ -1,0 +1,8 @@
+repoURL: "https://github.com/aws/eks-charts.git"
+path: "stable/aws-load-balancer-controller"
+targetRevision: "HEAD"
+
+
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
